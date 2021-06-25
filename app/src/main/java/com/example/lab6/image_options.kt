@@ -37,6 +37,8 @@ class image_options : AppCompatActivity() {
 
             } else if (resultCode == RESULT_CANCELED) {
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show()
+                val i = Intent(this, MainActivity::class.java)
+                startActivity(i)
             }
         }
     }
