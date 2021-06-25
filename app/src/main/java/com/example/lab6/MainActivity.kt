@@ -15,17 +15,16 @@ import android.provider.MediaStore
 import android.widget.ImageView
 import android.widget.Toast
 
-class MainActivity : AppCompatActivity(), SensorEventListener {
+class MainActivity : AppCompatActivity() {
 
     var imgCapture: ImageView? = null
     val Image_Capture_Code = 1
-    val sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val cInt = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        /*val cInt = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         startActivityForResult(cInt, Image_Capture_Code)
 
         fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
@@ -38,7 +37,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                     Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show()
                 }
             }
-        }
+        }*/
 
 
 
@@ -50,13 +49,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
     }
 
-    override fun onSensorChanged(event: SensorEvent?) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
-        TODO("Not yet implemented")
-    }
 
 
 }

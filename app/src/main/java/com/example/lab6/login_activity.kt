@@ -56,8 +56,8 @@ class login_activity : AppCompatActivity() {
 
     fun fingerPrintAction(){
         Toast.makeText(this, "Scanner de huella exitoso", Toast.LENGTH_LONG).show()
-        //val intent = Intent(this, MainActivity::class.java)
-        //startActivity(intent)
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
     }
     fun badFingerPrintAction(){
         Toast.makeText(this, "Scanner de huella fallido", Toast.LENGTH_LONG).show()
