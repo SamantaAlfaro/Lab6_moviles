@@ -1,8 +1,13 @@
 package com.example.lab6
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
@@ -12,10 +17,13 @@ import androidx.appcompat.app.AppCompatActivity
 import java.io.ByteArrayOutputStream
 
 
-class image_options : AppCompatActivity() {
+class image_options : AppCompatActivity(), SensorEventListener {
 
     var imgCapture: ImageView? = null
     val Image_Capture_Code = 1
+
+    private lateinit var mSensorManager: SensorManager
+    private lateinit var mProximity: Sensor
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +33,10 @@ class image_options : AppCompatActivity() {
 
         val cInt = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         startActivityForResult(cInt, Image_Capture_Code)
+
+
+        mSensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        mProximity = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY)
 
     }
 
@@ -41,5 +53,21 @@ class image_options : AppCompatActivity() {
                 startActivity(i)
             }
         }
+    }
+
+
+
+    override fun onResume() {
+        super.onResume()
+        mSensorManager.unregisterListener(this)
+
+    }
+
+    override fun onSensorChanged(event: SensorEvent?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
+        TODO("Not yet implemented")
     }
 }
