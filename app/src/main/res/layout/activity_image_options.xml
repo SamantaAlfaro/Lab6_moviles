@@ -9,10 +9,62 @@
     android:gravity="center_horizontal"
     android:background="@drawable/background">
 
-    <ImageView
-        android:id="@+id/preview_image"
-        android:layout_marginTop="30dp"
-        android:layout_width="300dp"
-        android:layout_height="300dp"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/preview_image"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:layout_marginTop="30dp" />
+
+            <TextView
+                android:gravity="center"
+                android:id="@+id/tv_description"
+                android:layout_width="300dp"
+                android:layout_height="150dp"
+                android:layout_margin="5dp"
+                android:textColor="@color/white"
+                android:textSize="20dp" />
+
+            <LinearLayout
+                android:layout_width="300dp"
+                android:layout_height="30dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="130dp"
+                    android:layout_height="match_parent"
+                    android:text="Temperatura: "
+                    android:textSize="20sp"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"></TextView>
+
+                <TextView
+
+                    android:id="@+id/temperature_txv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="top|center"
+                    android:text="30 °C"
+                    android:textSize="20sp"
+                    android:textColor="@color/white"
+                    android:textStyle="bold">
+
+                </TextView>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
 
 </LinearLayout>
