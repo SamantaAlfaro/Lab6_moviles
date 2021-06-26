@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         var btnCapture: ImageButton = findViewById(R.id.btn_camera)
+        var btnVideo: ImageButton = findViewById(R.id.btn_video)
 
         btnCapture!!.setOnClickListener {
             if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
@@ -36,6 +37,12 @@ class MainActivity : AppCompatActivity() {
                 startActivity(i)
             }, 2000)
 
+        }
+
+
+        btnVideo!!.setOnClickListener {
+            val i = Intent(this, record_video_options::class.java)
+            startActivity(i)
         }
 
     }
