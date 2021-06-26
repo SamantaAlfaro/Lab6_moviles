@@ -1,5 +1,6 @@
 package com.example.lab6
 
+import android.R.attr.bitmap
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
@@ -9,16 +10,21 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.location.*
+import android.net.Uri
 import android.os.Bundle
-import android.os.PowerManager
-import android.os.PowerManager.WakeLock
+import android.os.StrictMode
 import android.provider.MediaStore
-import android.view.WindowManager
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.FileProvider
+import androidx.core.graphics.drawable.toBitmap
+import java.io.File
+import java.io.FileOutputStream
 import java.util.*
+import kotlin.Exception
 
 
 class image_options : AppCompatActivity(), LocationListener, SensorEventListener{
@@ -27,6 +33,8 @@ class image_options : AppCompatActivity(), LocationListener, SensorEventListener
     val Image_Capture_Code = 1
     var description: TextView? = null
     var location_manager: LocationManager? = null
+    var share: Button? = null
+
 
     //ambient temp sensor
     private lateinit var sensorManager: SensorManager
@@ -51,16 +59,58 @@ class image_options : AppCompatActivity(), LocationListener, SensorEventListener
 
 
         imgCapture = findViewById(R.id.preview_image)
+        share = findViewById(R.id.send)
 
         val cInt = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         startActivityForResult(cInt, Image_Capture_Code)
         getLocation()
 
 
-
+        share!!.setOnClickListener {
+            val bitmap = imgCapture!!.getDrawable().toBitmap()
+            shared(bitmap)
+        }
 
 
     }
+
+
+    private fun shared(bitmap: Bitmap){
+        val uri: Uri = image(bitmap)
+        val intent = Intent(Intent.ACTION_SEND)
+
+        intent.putExtra(Intent.EXTRA_STREAM, uri)
+
+        intent.putExtra(Intent.EXTRA_TEXT, "Sharing Image")
+
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Subject Here")
+
+        intent.type = "image/png"
+
+        startActivity(Intent.createChooser(intent, "Share Via"))
+    }
+
+
+
+    private fun image(bitmap: Bitmap): Uri{
+
+        var imagefolder: File = File(getCacheDir(), "images");
+        var uri: Uri? = null
+        try {
+            imagefolder.mkdirs();
+            var file = File(imagefolder, "shared_image.png");
+            var outputStream = FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 90, outputStream);
+            outputStream.flush();
+            outputStream.close();
+            uri = FileProvider.getUriForFile(this, "com.anni.shareimage.fileprovider", file);
+        } catch (e: Exception) {
+            Toast.makeText(this, "" + e.message, Toast.LENGTH_LONG).show();
+        }
+        return uri!!
+    }
+
+
 
 
     @SuppressLint("MissingPermission")
@@ -99,6 +149,7 @@ class image_options : AppCompatActivity(), LocationListener, SensorEventListener
             var position: Geocoder = Geocoder(this, Locale.getDefault())
             var address: List<Address> = position.getFromLocation(location.latitude,location.longitude,1)
             var text_address: String = address.get(0).getAddressLine(0)
+
 
             description = findViewById(R.id.tv_description)
             description!!.text = text_address
