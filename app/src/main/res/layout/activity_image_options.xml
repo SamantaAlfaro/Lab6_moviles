@@ -38,13 +38,14 @@
 
             <LinearLayout
                 android:layout_width="300dp"
-                android:layout_height="30dp"
+                android:layout_height="60dp"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="130dp"
+                    android:layout_width="150dp"
+                    android:gravity="top|center"
                     android:layout_height="match_parent"
-                    android:text="Temperatura: "
+                    android:text="Temperatura\nambiente: "
                     android:textSize="20sp"
                     android:textColor="@color/white"
                     android:textStyle="bold"></TextView>
@@ -64,10 +65,11 @@
 
             </LinearLayout>
             <Button
+                android:layout_marginVertical="60dp"
                 android:id="@+id/send"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="SEND"/>
+                android:text="ENVIAR"/>
         </LinearLayout>
     </ScrollView>
 

@@ -10,12 +10,14 @@
     android:background="@drawable/background">
 
     <TextView
+        android:gravity="center"
         android:layout_marginTop="50dp"
         android:padding="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20dp"
-        android:text="Realiza autenticacion mediante \nel sensor biometrico, en el main \ntoma fotos y videos y los comparte \npor medio del bluetooth!"
+        android:text="Luego de autenticarte mediante \nel sensor biométrico, puedes \nproceder a tomar fotos y enviarlas a \ntus amigos por bluetooth u otro medio.\n\n Puedes probar grabar y reproducir la grabación!"
+        android:layout_marginVertical="50dp"
         android:textColor="@color/white"
         />
 
